@@ -1,5 +1,0 @@
-('images',
- 'images\\',
- [],
- 'DATA',
- [('images\\program_icon.ico', 'images\\program_icon.ico', 'DATA')])

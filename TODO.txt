@@ -1,5 +1,0 @@
-* Pirmas dalyvio laikas nebûna nulinis, todël pirmà reikia paleisti ið karto prieð tai palaukus N sekundþiø (gal leisti nustatyti vartotojui)
-
-* Paleidus laikmatá reikia rodyti atskirà langà kur bûtø aiðkiai rodomas didelis sekanèio dalyvio numeris ir laikas iki jo paleidimo
-
-* Rodyti atskirà sàraðà su visais laikais ir þymëti þaliai kai tas buvo paleistas, kad matytûsi eiliðkumas ir visi kurie buvo ávesti
