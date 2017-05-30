@@ -21,8 +21,6 @@ class DataParser:
     '''
         Data structure verification happens by checking each line with
         regex, if the line doesn't match, then the format is invalid.
-        TODO: padaryti kad tikrintu ar sekantis laikas yra didesnis
-        uz praeita.
     '''
     def verifyDataStructure(self, data):
         compiledRegex = re.compile(self.DATA_STRUCTURE_REGEX)
@@ -36,14 +34,25 @@ class DataParser:
     def loadData(self, data):
         self.LOADED_DATA = [] # Clear previous entries
         lines = sorted(data.split("\n"), key=self.sortingKey)
+        prevTimeInMillis = 0
+        timeInMillis = 0
         for line in lines:
             runnerNr, time = line.strip().split("\t")
             timeObj = datetime.strptime(time, self.TIME_FORMAT)
             timeInMillis = int(
                 (((timeObj.minute*60)+timeObj.second)*1000)+(timeObj.microsecond/1000)
             )
-            # print("%d" % timeInMillis)
-            self.LOADED_DATA.append({"runnerNr":runnerNr, "time":time, "timeInMillis":timeInMillis})
+            if (prevTimeInMillis != 0):
+                timeDiff = timeInMillis - prevTimeInMillis
+            else:
+                timeDiff = 0
+            # print("%d" % timeDiff)
+            self.LOADED_DATA.append({
+                "runnerNr":runnerNr,
+                "time":time,
+                "timeInMillis":timeInMillis,
+                "timeDiff":timeDiff})
+            prevTimeInMillis = timeInMillis
 #=========================================================
     ''' Resets the counters and indexes '''
     def reset(self):

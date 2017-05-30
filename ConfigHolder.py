@@ -38,7 +38,7 @@ class ConfigHolder:
             fallback = self.DEFAULTS["sound_file"][1])
 #=========================================================
     def getSecsBeforeFirst(self):
-        return self.configs.get(self.DEFAULT_SECTION,
+        return int(self.configs.get(self.DEFAULT_SECTION,
             self.DEFAULTS["secs_before_first"][0],
-            fallback = self.DEFAULTS["secs_before_first"][1])
+            fallback = self.DEFAULTS["secs_before_first"][1]))
 #=========================================================

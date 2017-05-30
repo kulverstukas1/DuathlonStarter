@@ -26,6 +26,7 @@ class Start(QMainWindow, Ui_MainWindow):
     currRunnerMillisDiff = 0
     currRunnerMillis = 0
     prevRunnerMillis = 0
+    timeBeforeFirst = 0
     TIMER_FREQUENCY = 10
     #=====================================================
 
@@ -76,22 +77,22 @@ class Start(QMainWindow, Ui_MainWindow):
             msg.setWindowTitle("Klaida")
             msg.setText("Nurodytas garso failas (%s) neegzistuoja." % self.configs.getSoundFileName())
             msg.addButton(QMessageBox.Ok)
-            msg.exec_()
+            # msg.exec_()
 #=========================================================
     ''' Callback for a timer ticker '''
     def timerTickCallback(self):
-        if (self.currRunnerMillisDiff > 0):
+        if (self.timeBeforeFirst > 0):
+            self.timeBeforeFirst -= self.TIMER_FREQUENCY
+            self.timerLabel.setText(self.dataParser.formatMillis(self.timeBeforeFirst))
+        elif (self.currRunnerMillisDiff > 0):
             self.currRunnerMillisDiff -= self.TIMER_FREQUENCY
             self.timerLabel.setText(self.dataParser.formatMillis(self.currRunnerMillisDiff))
         else:
             winsound.PlaySound(self.configs.getSoundFileName(), winsound.SND_ASYNC)
             currentRunner = self.dataParser.getCurrentRunner()
             if (currentRunner):
-                self.prevRunnerMillis = self.currRunnerMillis
-                self.currRunnerMillis = currentRunner["timeInMillis"]
-                self.currRunnerMillisDiff = currentRunner["timeInMillis"]-self.prevRunnerMillis
-                # print(self.currRunnerMillisDiff)
-                self.currentRunnerGroup.setTitle("Bus paleistas: %d iš %d" %
+                self.currRunnerMillisDiff = currentRunner["timeDiff"]
+                self.currentRunnerGroup.setTitle("Dabar paleistas: %d iš %d" %
                     (self.dataParser.getCurrentRunnerNum()+1, self.dataParser.getTotalRunners()))
                 self.currentRunnerNr.setText("Dalyvis: %s" % currentRunner["runnerNr"])
                 self.currentRunnerTime.setText("Laikas: %s" % currentRunner["time"])
@@ -198,7 +199,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.stopBtn.setEnabled(False)
         self.resetBtn.setEnabled(True)
         
-        self.currentRunnerGroup.setTitle("Bus paleistas")
+        self.currentRunnerGroup.setTitle("Dabar paleistas")
         self.currentRunnerNr.setText("Dalyvis:")
         self.currentRunnerTime.setText("Laikas:")
         
@@ -206,6 +207,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.currentDifference.setText("00:00,0")
         # Need to reset the counters in case we're on the last runner
         self.dataParser.reset()
+        self.timeBeforeFirst = self.configs.getSecsBeforeFirst()*1000
         self.currRunnerMillisDiff = 0
         self.currRunnerMillis = 0
         self.prevRunnerMillis = 0
