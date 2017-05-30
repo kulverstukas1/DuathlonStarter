@@ -33,7 +33,7 @@ class DataParser:
     ''' Method for loading data into an array for better management '''
     def loadData(self, data):
         self.LOADED_DATA = [] # Clear previous entries
-        lines = sorted(data.split("\n"), key=self.sortingKey)
+        lines = sorted(data.split("\n"), key=self.sortingKey)[::-1]
         prevTimeInMillis = 0
         timeInMillis = 0
         for line in lines:
@@ -43,16 +43,17 @@ class DataParser:
                 (((timeObj.minute*60)+timeObj.second)*1000)+(timeObj.microsecond/1000)
             )
             if (prevTimeInMillis != 0):
-                timeDiff = timeInMillis - prevTimeInMillis
+                timeDiff = prevTimeInMillis - timeInMillis
             else:
                 timeDiff = 0
-            # print("%d" % timeDiff)
+            # print("%s: %d" % (runnerNr, timeDiff))
             self.LOADED_DATA.append({
                 "runnerNr":runnerNr,
                 "time":time,
                 "timeInMillis":timeInMillis,
                 "timeDiff":timeDiff})
             prevTimeInMillis = timeInMillis
+        self.LOADED_DATA = self.LOADED_DATA[::-1]
 #=========================================================
     ''' Resets the counters and indexes '''
     def reset(self):
