@@ -86,6 +86,8 @@ class Ui_MainWindow(object):
         self.menuApie.setObjectName("menuApie")
         self.menuData = QtWidgets.QMenu(self.menubar)
         self.menuData.setObjectName("menuData")
+        self.menuNustatymai = QtWidgets.QMenu(self.menubar)
+        self.menuNustatymai.setObjectName("menuNustatymai")
         MainWindow.setMenuBar(self.menubar)
         self.action_fromFile = QtWidgets.QAction(MainWindow)
         self.action_fromFile.setObjectName("action_fromFile")
@@ -93,10 +95,14 @@ class Ui_MainWindow(object):
         self.action_fromMemory.setObjectName("action_fromMemory")
         self.action_information = QtWidgets.QAction(MainWindow)
         self.action_information.setObjectName("action_information")
+        self.action_nustatymai = QtWidgets.QAction(MainWindow)
+        self.action_nustatymai.setObjectName("action_nustatymai")
         self.menuApie.addAction(self.action_information)
         self.menuData.addAction(self.action_fromFile)
         self.menuData.addAction(self.action_fromMemory)
+        self.menuNustatymai.addAction(self.action_nustatymai)
         self.menubar.addAction(self.menuData.menuAction())
+        self.menubar.addAction(self.menuNustatymai.menuAction())
         self.menubar.addAction(self.menuApie.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -119,11 +125,13 @@ class Ui_MainWindow(object):
         self.currentDifference.setText(_translate("MainWindow", "00:00,0"))
         self.menuApie.setTitle(_translate("MainWindow", "Apie"))
         self.menuData.setTitle(_translate("MainWindow", "Duomenys"))
+        self.menuNustatymai.setTitle(_translate("MainWindow", "Nustatymai"))
         self.action_fromFile.setText(_translate("MainWindow", "Iš failo"))
         self.action_fromFile.setShortcut(_translate("MainWindow", "Ctrl+F"))
         self.action_fromMemory.setText(_translate("MainWindow", "Iš atminties"))
         self.action_fromMemory.setShortcut(_translate("MainWindow", "Ctrl+M"))
         self.action_information.setText(_translate("MainWindow", "Informacija"))
+        self.action_nustatymai.setText(_translate("MainWindow", "Nustatymai"))
 
 
 if __name__ == "__main__":

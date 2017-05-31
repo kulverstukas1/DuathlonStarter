@@ -1,6 +1,9 @@
-import os.path
+import os
 import math
+from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtWidgets import QFileDialog
 from configparser import ConfigParser
+from SettingsDialog import Ui_settingsDialog
 
 class ConfigHolder:
 
@@ -12,6 +15,7 @@ class ConfigHolder:
         "secs_before_first": ("secs_before_first", "5")
     }
     configs = None
+    settingsDialog = None
     #=====================================================
     
     def __init__(self):
@@ -53,4 +57,30 @@ class ConfigHolder:
             return True
         else:
             return False
+#=========================================================
+    ''' Show a settings dialog to change some preferences '''
+    def showSettingsDialog(self, context):
+        self.settingsDialog = QtWidgets.QDialog(context,
+            QtCore.Qt.WindowTitleHint|QtCore.Qt.WindowCloseButtonHint)
+        ui = Ui_settingsDialog()
+        ui.setupUi(self.settingsDialog)
+        ui.selectSoundFile.clicked.connect(lambda: selectSoundFileBtnCallback(ui))
+        ui.okBtn.clicked.connect(lambda: okBtnClick(self.settingsDialog, ui))
+        ui.cancelBtn.clicked.connect(self.settingsDialog.close)
+        self.settingsDialog.setFixedSize(self.settingsDialog.size())
+        self.settingsDialog.show()
+        #---Callbacks---
+        def selectSoundFileBtnCallback(ui):
+            fileDialog = QFileDialog()
+            fileDialog.setFileMode(QFileDialog.ExistingFile)
+            fileDialog.setNameFilter("Garso failai (*.wav)")
+            if (fileDialog.exec_()):
+                ui.soundFilePath.setText(os.path.relpath((fileDialog.selectedFiles()[0])))
+        #---------------
+        def okBtnClick(settingsDlg, ui):
+            self.configs.set(self.DEFAULT_SECTION, "sound_file", ui.soundFilePath.text())
+            self.configs.set(self.DEFAULT_SECTION, "secs_before_first", str(ui.preStartSecs.value()))
+            self.configs.write(open(self.CONFIG_FILE, "w"))
+            settingsDlg.close()
+        #---/Callbacks---
 #=========================================================

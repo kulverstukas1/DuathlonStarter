@@ -249,7 +249,14 @@
     <addaction name="action_fromFile"/>
     <addaction name="action_fromMemory"/>
    </widget>
+   <widget class="QMenu" name="menuNustatymai">
+    <property name="title">
+     <string>Nustatymai</string>
+    </property>
+    <addaction name="action_nustatymai"/>
+   </widget>
    <addaction name="menuData"/>
+   <addaction name="menuNustatymai"/>
    <addaction name="menuApie"/>
   </widget>
   <action name="action_fromFile">
@@ -271,6 +278,11 @@
   <action name="action_information">
    <property name="text">
     <string>Informacija</string>
+   </property>
+  </action>
+  <action name="action_nustatymai">
+   <property name="text">
+    <string>Nustatymai</string>
    </property>
   </action>
  </widget>

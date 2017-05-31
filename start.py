@@ -44,6 +44,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.action_information.triggered.connect(self.aboutMenuClicked)
         self.action_fromMemory.triggered.connect(self.fromMemoryMenuClicked)
         self.action_fromFile.triggered.connect(self.fromFileMenuClicked)
+        self.action_nustatymai.triggered.connect(lambda: self.configs.showSettingsDialog(self))
         
         self.startBtn.clicked.connect(self.startBtnClicked)
         self.stopBtn.clicked.connect(self.stopBtnClicked)
