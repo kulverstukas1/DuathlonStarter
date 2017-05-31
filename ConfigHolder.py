@@ -1,4 +1,5 @@
 import os.path
+import math
 from configparser import ConfigParser
 
 class ConfigHolder:
@@ -29,7 +30,7 @@ class ConfigHolder:
                 if (not beenChanges): beenChanges = True
         
         if (beenChanges):
-            configs.write(open(self.CONFIG_FILE, "w"))
+            self.configs.write(open(self.CONFIG_FILE, "w"))
     
 #=========================================================
     def getSoundFileName(self):
@@ -41,4 +42,15 @@ class ConfigHolder:
         return int(self.configs.get(self.DEFAULT_SECTION,
             self.DEFAULTS["secs_before_first"][0],
             fallback = self.DEFAULTS["secs_before_first"][1]))
+#=========================================================
+    def resetPreStartSecs(self):
+        if (not self.configs.get(self.DEFAULT_SECTION,
+            self.DEFAULTS["secs_before_first"][0]).isdigit()):
+            self.configs.set(self.DEFAULT_SECTION,
+                self.DEFAULTS["secs_before_first"][0],
+                self.DEFAULTS["secs_before_first"][1])
+            self.configs.write(open(self.CONFIG_FILE, "w"))
+            return True
+        else:
+            return False
 #=========================================================

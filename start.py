@@ -24,9 +24,6 @@ class Start(QMainWindow, Ui_MainWindow):
     windowIcon = None
     # Needed for timekeeping
     currRunnerMillisDiff = 0
-    currRunnerMillis = 0
-    prevRunnerMillis = 0
-    timeBeforeFirst = 0
     TIMER_FREQUENCY = 10
     #=====================================================
 
@@ -58,7 +55,7 @@ class Start(QMainWindow, Ui_MainWindow):
         if (self.runnerTimer.isActive()):
             reply = QMessageBox.question(self,
                 "Ar tikrai?",
-                "Laikmatis dabar aktyvus. Ar tikrai norite išeiti?",
+                "Laikmatis yra aktyvus. Ar tikrai norite išeiti?",
                 QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
             if (reply == QMessageBox.Yes):
                 event.accept()
@@ -70,14 +67,20 @@ class Start(QMainWindow, Ui_MainWindow):
     ''' Event that fires when we're about to show the main window '''
     def showEvent(self, event):
         # if the sound file doesn't exist then show a warning
+        msg = QMessageBox()
+        msg.setWindowIcon(self.windowIcon)
+        msg.addButton(QMessageBox.Ok)
         if (not os.path.isfile(self.configs.getSoundFileName())):
-            msg = QMessageBox()
             msg.setIcon(QMessageBox.Warning)
-            msg.setWindowIcon(self.windowIcon)
             msg.setWindowTitle("Klaida")
             msg.setText("Nurodytas garso failas (%s) neegzistuoja." % self.configs.getSoundFileName())
-            msg.addButton(QMessageBox.Ok)
-            # msg.exec_()
+            msg.exec_()
+        if (self.configs.resetPreStartSecs()):
+            self.configs.resetPreStartSecs()
+            msg.setIcon(QMessageBox.Information)
+            msg.setWindowTitle("Įspėjimas")
+            msg.setText("Nurodytos sekundės nėra skaičius. Atstatyta į %d." % self.configs.getSecsBeforeFirst())
+            msg.exec_()
 #=========================================================
     ''' Callback for a timer ticker '''
     def timerTickCallback(self):
@@ -90,9 +93,9 @@ class Start(QMainWindow, Ui_MainWindow):
             currentRunner = self.dataParser.getCurrentRunner()
             if (currentRunner):
                 if (self.dataParser.getCurrentRunnerNum() == 0):
-                    currentRunner["timeDiff"] = self.timeBeforeFirst
+                    currentRunner["timeDiff"] = self.configs.getSecsBeforeFirst()*1000
                 self.currRunnerMillisDiff = currentRunner["timeDiff"]
-                self.currentRunnerGroup.setTitle("Dabar paleistas: %d iš %d" %
+                self.currentRunnerGroup.setTitle("Bus paleistas: %d iš %d" %
                     (self.dataParser.getCurrentRunnerNum()+1, self.dataParser.getTotalRunners()))
                 self.currentRunnerNr.setText("Dalyvis: %s" % currentRunner["runnerNr"])
                 self.currentRunnerTime.setText("Laikas: %s" % currentRunner["time"])
@@ -180,8 +183,6 @@ class Start(QMainWindow, Ui_MainWindow):
         self.resetBtn.setEnabled(True)
         self.dataParser.reset()
         self.currRunnerMillisDiff = 0
-        self.currRunnerMillis = 0
-        self.prevRunnerMillis = 0
         self.populateGui()
 #=========================================================
     ''' Here we check if the selected/entered data is valid and can be parsed '''
@@ -199,7 +200,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.stopBtn.setEnabled(False)
         self.resetBtn.setEnabled(True)
         
-        self.currentRunnerGroup.setTitle("Dabar paleistas")
+        self.currentRunnerGroup.setTitle("Bus paleistas")
         self.currentRunnerNr.setText("Dalyvis:")
         self.currentRunnerTime.setText("Laikas:")
         
@@ -207,10 +208,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.currentDifference.setText("00:00,0")
         # Need to reset the counters in case we're on the last runner
         self.dataParser.reset()
-        self.timeBeforeFirst = self.configs.getSecsBeforeFirst()*1000
         self.currRunnerMillisDiff = 0
-        self.currRunnerMillis = 0
-        self.prevRunnerMillis = 0
         # Data was just loaded, so show the first runner on our list
         currentRunner = self.dataParser.getCurrentRunner()
         self.nextRunnerNr.setText("Dalyvis: %s" % currentRunner["runnerNr"])

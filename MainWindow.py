@@ -105,7 +105,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "DuathlonStarter"))
-        self.currentRunnerGroup.setTitle(_translate("MainWindow", "Dabar paleistas"))
+        self.currentRunnerGroup.setTitle(_translate("MainWindow", "Bus paleistas"))
         self.currentRunnerNr.setText(_translate("MainWindow", "Dalyvis:"))
         self.currentRunnerTime.setText(_translate("MainWindow", "Laikas:"))
         self.nextRunnerGroup.setTitle(_translate("MainWindow", "Sekantis"))

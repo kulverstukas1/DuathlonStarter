@@ -34,7 +34,7 @@
      </rect>
     </property>
     <property name="title">
-     <string>Dabar paleistas</string>
+     <string>Bus paleistas</string>
     </property>
     <property name="flat">
      <bool>false</bool>
