@@ -81,16 +81,16 @@ class Start(QMainWindow, Ui_MainWindow):
 #=========================================================
     ''' Callback for a timer ticker '''
     def timerTickCallback(self):
-        if (self.timeBeforeFirst > 0):
-            self.timeBeforeFirst -= self.TIMER_FREQUENCY
-            self.timerLabel.setText(self.dataParser.formatMillis(self.timeBeforeFirst))
-        elif (self.currRunnerMillisDiff > 0):
+        if (self.currRunnerMillisDiff > 0):
             self.currRunnerMillisDiff -= self.TIMER_FREQUENCY
             self.timerLabel.setText(self.dataParser.formatMillis(self.currRunnerMillisDiff))
         else:
-            winsound.PlaySound(self.configs.getSoundFileName(), winsound.SND_ASYNC)
+            if (self.dataParser.getCurrentRunnerNum() > 0):
+                winsound.PlaySound(self.configs.getSoundFileName(), winsound.SND_ASYNC)
             currentRunner = self.dataParser.getCurrentRunner()
             if (currentRunner):
+                if (self.dataParser.getCurrentRunnerNum() == 0):
+                    currentRunner["timeDiff"] = self.timeBeforeFirst
                 self.currRunnerMillisDiff = currentRunner["timeDiff"]
                 self.currentRunnerGroup.setTitle("Dabar paleistas: %d iš %d" %
                     (self.dataParser.getCurrentRunnerNum()+1, self.dataParser.getTotalRunners()))

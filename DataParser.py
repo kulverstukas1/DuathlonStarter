@@ -33,7 +33,7 @@ class DataParser:
     ''' Method for loading data into an array for better management '''
     def loadData(self, data):
         self.LOADED_DATA = [] # Clear previous entries
-        lines = sorted(data.split("\n"), key=self.sortingKey)[::-1]
+        lines = sorted(data.split("\n"), key=self.sortingKey)
         prevTimeInMillis = 0
         timeInMillis = 0
         for line in lines:
@@ -43,17 +43,16 @@ class DataParser:
                 (((timeObj.minute*60)+timeObj.second)*1000)+(timeObj.microsecond/1000)
             )
             if (prevTimeInMillis != 0):
-                timeDiff = prevTimeInMillis - timeInMillis
+                timeDiff = timeInMillis - prevTimeInMillis
             else:
                 timeDiff = 0
-            # print("%s: %d" % (runnerNr, timeDiff))
+            # print("%d" % timeDiff)
             self.LOADED_DATA.append({
                 "runnerNr":runnerNr,
                 "time":time,
                 "timeInMillis":timeInMillis,
                 "timeDiff":timeDiff})
             prevTimeInMillis = timeInMillis
-        self.LOADED_DATA = self.LOADED_DATA[::-1]
 #=========================================================
     ''' Resets the counters and indexes '''
     def reset(self):
@@ -86,7 +85,10 @@ class DataParser:
     ''' Formats the given milliseconds into a nicer format '''
     def formatMillis(self, millis):
         try:
-            return datetime.fromtimestamp((millis / 1000)).strftime("%M:%S,%f")[:-5]
+            # return datetime.fromtimestamp((millis / 1000)).strftime("%M:%S,%f")[:-5]
+            (dt, micro) = (datetime.fromtimestamp((millis / 1000)).strftime(self.TIME_FORMAT)).split(',')
+            dt = "%s,%03d" % (dt, round(int(micro), -1) / 1000)
+            return dt[:-2]
         except:
             return "ER:ER,E"
 #=========================================================
