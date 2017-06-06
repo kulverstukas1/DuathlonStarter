@@ -219,6 +219,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.currentDifference.setText("00:00,0")
         # Need to reset the counters in case we're on the last runner
         self.dataParser.reset()
+        self.runnerList.reset(self.dataParser.getAllData(), self.dataParser.getCurrentRunnerNum())
         self.currRunnerMillisDiff = 0
         # Data was just loaded, so show the first runner on our list
         currentRunner = self.dataParser.getCurrentRunner()

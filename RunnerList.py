@@ -17,6 +17,11 @@ class RunnerList(QDialog, Ui_runnerListDialog):
         
     ''' Called when we need to show this dialog '''
     def showRunnerListDialog(self, data, currRunner):
+        self.reset(data, currRunner)
+        self.runnerListDialog.show()
+        
+    ''' Resets the interface in case new data was loaded '''
+    def reset(self, data, currRunner):
         # don't create multiple references, only allow one dialog at a time
         if (self.runnerListDialog is None):
             self.runnerListDialog = QDialog(self.parent,
@@ -28,8 +33,8 @@ class RunnerList(QDialog, Ui_runnerListDialog):
             # self.runnerList.setEnabled(False)
             self.greenBrush = QBrush(QtCore.Qt.green)
         self.prepRunnerList(self.runnerList, data, currRunner)
-        self.runnerListDialog.show()
-        
+    
+    ''' Prepares as list of runners with loaded data '''
     def prepRunnerList(self, listObj, data, currRunner):
         headers = ['Bėgikas', 'Laikas', 'Paleistas']
         listModel = QStandardItemModel(0, len(headers))
@@ -48,8 +53,10 @@ class RunnerList(QDialog, Ui_runnerListDialog):
                 colorItem.setBackground(redBrush)
             listModel.appendRow([runnerItem, timeItem, colorItem])
         listObj.setModel(listModel)
-        
+    
+    ''' Marks the runner green when he is to go '''
     def markGreen(self, runner):
+        # this is to compensate for the first runner
         if (runner > 0):
             runner -= 1
             listModel = self.runnerList.model()
