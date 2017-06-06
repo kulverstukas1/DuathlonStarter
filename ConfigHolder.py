@@ -64,6 +64,8 @@ class ConfigHolder:
             QtCore.Qt.WindowTitleHint|QtCore.Qt.WindowCloseButtonHint)
         ui = Ui_settingsDialog()
         ui.setupUi(self.settingsDialog)
+        ui.soundFilePath.setText(self.configs.get(self.DEFAULT_SECTION, "sound_file"))
+        ui.preStartSecs.setValue(int(self.configs.get(self.DEFAULT_SECTION, "secs_before_first")))
         ui.selectSoundFile.clicked.connect(lambda: selectSoundFileBtnCallback(ui))
         ui.okBtn.clicked.connect(lambda: okBtnClick(self.settingsDialog, ui))
         ui.cancelBtn.clicked.connect(self.settingsDialog.close)

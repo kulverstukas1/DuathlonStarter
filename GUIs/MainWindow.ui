@@ -255,7 +255,15 @@
     </property>
     <addaction name="action_nustatymai"/>
    </widget>
+   <widget class="QMenu" name="menuVaizdas">
+    <property name="title">
+     <string>Vaizdas</string>
+    </property>
+    <addaction name="action_runnerList"/>
+    <addaction name="action_bigTimer"/>
+   </widget>
    <addaction name="menuData"/>
+   <addaction name="menuVaizdas"/>
    <addaction name="menuNustatymai"/>
    <addaction name="menuApie"/>
   </widget>
@@ -283,6 +291,16 @@
   <action name="action_nustatymai">
    <property name="text">
     <string>Nustatymai</string>
+   </property>
+  </action>
+  <action name="action_runnerList">
+   <property name="text">
+    <string>Dalyvių sąrašas</string>
+   </property>
+  </action>
+  <action name="action_bigTimer">
+   <property name="text">
+    <string>Didelis laikmatis</string>
    </property>
   </action>
  </widget>

@@ -8,6 +8,7 @@ from AboutDialog import Ui_aboutDialog
 from LoadDataDialog import Ui_fromMemoryDialog
 from DataParser import DataParser
 from ConfigHolder import ConfigHolder
+from RunnerList import RunnerList
 
 class Start(QMainWindow, Ui_MainWindow):
     
@@ -22,6 +23,7 @@ class Start(QMainWindow, Ui_MainWindow):
     configs = None
     runnerTimer = None
     windowIcon = None
+    runnerList = None
     # Needed for timekeeping
     currRunnerMillisDiff = 0
     TIMER_FREQUENCY = 10
@@ -31,6 +33,7 @@ class Start(QMainWindow, Ui_MainWindow):
         super(Start, self).__init__(parent)
         self.dataParser = DataParser()
         self.configs = ConfigHolder()
+        self.runnerList = RunnerList(self)
         self.runnerTimer = QtCore.QTimer(self)
         self.runnerTimer.timeout.connect(self.timerTickCallback)
         self.setupUi(self)
@@ -45,6 +48,10 @@ class Start(QMainWindow, Ui_MainWindow):
         self.action_fromMemory.triggered.connect(self.fromMemoryMenuClicked)
         self.action_fromFile.triggered.connect(self.fromFileMenuClicked)
         self.action_nustatymai.triggered.connect(lambda: self.configs.showSettingsDialog(self))
+        self.action_runnerList.triggered.connect(lambda: self.runnerList.showRunnerListDialog(
+            self.dataParser.getAllData(),
+            self.dataParser.getCurrentRunnerNum()
+        ))
         
         self.startBtn.clicked.connect(self.startBtnClicked)
         self.stopBtn.clicked.connect(self.stopBtnClicked)
@@ -92,6 +99,7 @@ class Start(QMainWindow, Ui_MainWindow):
             if (self.dataParser.getCurrentRunnerNum() > 0):
                 winsound.PlaySound(self.configs.getSoundFileName(), winsound.SND_ASYNC)
             currentRunner = self.dataParser.getCurrentRunner()
+            self.runnerList.markGreen(self.dataParser.getCurrentRunnerNum())
             if (currentRunner):
                 if (self.dataParser.getCurrentRunnerNum() == 0):
                     currentRunner["timeDiff"] = self.configs.getSecsBeforeFirst()*1000
@@ -158,6 +166,8 @@ class Start(QMainWindow, Ui_MainWindow):
             if (self.checkData(fContents, None)):
                 self.dataParser.loadData(fContents)
                 self.populateGui()
+    #------------
+    '''  '''
     #------------
     ''' Starts the countdown and beeps '''
     def startBtnClicked(self):

@@ -1,0 +1,58 @@
+import sys
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QDialog, QApplication, QAbstractItemView
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QBrush, QColor
+from RunnerListDialog import Ui_runnerListDialog
+
+class RunnerList(QDialog, Ui_runnerListDialog):
+
+    parent = None
+    runnerListDialog = None
+    runnerList = None
+    greenBrush = None
+
+    def __init__(self, parent=None, name=None):
+        super(RunnerList, self).__init__(parent)
+        self.parent = parent
+        
+    ''' Called when we need to show this dialog '''
+    def showRunnerListDialog(self, data, currRunner):
+        # don't create multiple references, only allow one dialog at a time
+        if (self.runnerListDialog is None):
+            self.runnerListDialog = QDialog(self.parent,
+                QtCore.Qt.WindowTitleHint|QtCore.Qt.WindowCloseButtonHint)
+            ui = Ui_runnerListDialog()
+            ui.setupUi(self.runnerListDialog)
+            self.runnerList = ui.runnerList
+            self.runnerList.setSelectionBehavior(QAbstractItemView.SelectRows)
+            # self.runnerList.setEnabled(False)
+            self.greenBrush = QBrush(QtCore.Qt.green)
+        self.prepRunnerList(self.runnerList, data, currRunner)
+        self.runnerListDialog.show()
+        
+    def prepRunnerList(self, listObj, data, currRunner):
+        headers = ['Bėgikas', 'Laikas', 'Paleistas']
+        listModel = QStandardItemModel(0, len(headers))
+        listModel.setHorizontalHeaderLabels(headers)
+        redBrush = QBrush(QtCore.Qt.red)
+        for index, item in enumerate(data):
+            runnerItem = QStandardItem(item["runnerNr"])
+            runnerItem.setEditable(False)
+            timeItem = QStandardItem(item["time"])
+            timeItem.setEditable(False)
+            colorItem = QStandardItem("")
+            colorItem.setEditable(False)
+            if (currRunner-1 > index):
+                colorItem.setBackground(self.greenBrush)
+            else:
+                colorItem.setBackground(redBrush)
+            listModel.appendRow([runnerItem, timeItem, colorItem])
+        listObj.setModel(listModel)
+        
+    def markGreen(self, runner):
+        if (runner > 0):
+            runner -= 1
+            listModel = self.runnerList.model()
+            item = listModel.item(runner, 2)
+            item.setBackground(self.greenBrush)
+            listModel.setItem(runner, 2, item)

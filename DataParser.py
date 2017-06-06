@@ -58,6 +58,10 @@ class DataParser:
     def reset(self):
         self.currentRunnerIndex = 0
 #=========================================================
+    ''' Returns all the data that we have loaded '''
+    def getAllData(self):
+        return self.LOADED_DATA
+#=========================================================
     ''' Gets the next runner on the list, returns false if there's no more runners '''
     def getNextRunner(self):
         if (len(self.LOADED_DATA) > self.currentRunnerIndex+1):
