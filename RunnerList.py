@@ -10,6 +10,7 @@ class RunnerList(QDialog, Ui_runnerListDialog):
     runnerListDialog = None
     runnerList = None
     greenBrush = None
+    redBrush = None
 
     def __init__(self, parent=None, name=None):
         super(RunnerList, self).__init__(parent)
@@ -32,6 +33,7 @@ class RunnerList(QDialog, Ui_runnerListDialog):
             self.runnerList.setSelectionBehavior(QAbstractItemView.SelectRows)
             # self.runnerList.setEnabled(False)
             self.greenBrush = QBrush(QtCore.Qt.green)
+            self.redBrush = QBrush(QtCore.Qt.red)
         self.prepRunnerList(self.runnerList, data, currRunner)
     
     ''' Prepares as list of runners with loaded data '''
@@ -39,7 +41,6 @@ class RunnerList(QDialog, Ui_runnerListDialog):
         headers = ['Bėgikas', 'Laikas', 'Paleistas']
         listModel = QStandardItemModel(0, len(headers))
         listModel.setHorizontalHeaderLabels(headers)
-        redBrush = QBrush(QtCore.Qt.red)
         for index, item in enumerate(data):
             runnerItem = QStandardItem(item["runnerNr"])
             runnerItem.setEditable(False)
@@ -50,9 +51,18 @@ class RunnerList(QDialog, Ui_runnerListDialog):
             if (currRunner-1 > index):
                 colorItem.setBackground(self.greenBrush)
             else:
-                colorItem.setBackground(redBrush)
+                colorItem.setBackground(self.redBrush)
             listModel.appendRow([runnerItem, timeItem, colorItem])
         listObj.setModel(listModel)
+    
+    ''' Resets the last column color to red for all runners '''
+    def resetColor(self):
+        listModel = self.runnerList.model()
+        rowCount = listModel.rowCount()
+        for i in range(rowCount):
+            item = listModel.item(i, 2)
+            item.setBackground(self.redBrush)
+            listModel.setItem(i, 2, item)
     
     ''' Marks the runner green when he is to go '''
     def markGreen(self, runner):

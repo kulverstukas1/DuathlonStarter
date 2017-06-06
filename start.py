@@ -193,6 +193,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.stopBtn.setEnabled(False)
         self.resetBtn.setEnabled(True)
         self.dataParser.reset()
+        self.runnerList.resetColor()
         self.currRunnerMillisDiff = 0
         self.populateGui()
 #=========================================================
