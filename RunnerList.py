@@ -1,7 +1,7 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QAbstractItemView
-from PyQt5.QtGui import QStandardItemModel, QStandardItem, QBrush, QColor
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QBrush, QColor, QPalette
 from RunnerListDialog import Ui_runnerListDialog
 
 class RunnerList(QDialog, Ui_runnerListDialog):
@@ -30,8 +30,14 @@ class RunnerList(QDialog, Ui_runnerListDialog):
             ui = Ui_runnerListDialog()
             ui.setupUi(self.runnerListDialog)
             self.runnerList = ui.runnerList
-            self.runnerList.setSelectionBehavior(QAbstractItemView.SelectRows)
-            # self.runnerList.setEnabled(False)
+            self.runnerList.setEditTriggers(QAbstractItemView.NoEditTriggers)
+            self.runnerList.setFocusPolicy(QtCore.Qt.NoFocus)
+            self.runnerList.setSelectionMode(QAbstractItemView.NoSelection)
+            # self.runnerList.setSelectionBehavior(QAbstractItemView.SelectRows)
+            # listPalette = self.runnerList.palette()
+            # listPalette.setBrush(QPalette.Highlight, QBrush(QtCore.Qt.white))
+            # listPalette.setBrush(QPalette.HighlightedText, QBrush(QtCore.Qt.black))
+            # self.runnerList.setPalette(listPalette)
             self.greenBrush = QBrush(QtCore.Qt.green)
             self.redBrush = QBrush(QtCore.Qt.red)
         self.prepRunnerList(self.runnerList, data, currRunner)
