@@ -168,12 +168,11 @@ class Start(QMainWindow, Ui_MainWindow):
                 self.dataParser.loadData(fContents)
                 self.populateGui()
     #------------
-    '''  '''
-    #------------
     ''' Starts the countdown and beeps '''
     def startBtnClicked(self):
-        currentRunner = self.dataParser.getCurrentRunner()
-        if (not currentRunner): self.populateGui()
+        currNum = self.dataParser.getCurrentRunnerNum()
+        total = self.dataParser.getTotalRunners()
+        if (currNum > total): self.populateGui()
         self.startBtn.setEnabled(False)
         self.stopBtn.setEnabled(True)
         self.resetBtn.setEnabled(False)
