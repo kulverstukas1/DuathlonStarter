@@ -118,13 +118,13 @@ class Start(QMainWindow, Ui_MainWindow):
                         nextRunner['timeInMillis']-currentRunner["timeInMillis"]
                     ) if (nextRunner['timeInMillis'] > currentRunner["timeInMillis"]) else "---"
                 )
-                self.dataParser.setOnNextRunner()
             else:
                 self.runnerTimer.stop()
                 self.startBtn.setEnabled(True)
                 self.stopBtn.setEnabled(False)
                 self.resetBtn.setEnabled(True)
                 self.enableMenuBarItems()
+            self.dataParser.setOnNextRunner()
 #=========================================================
     ''' Shows information about this program '''
     def aboutMenuClicked(self):

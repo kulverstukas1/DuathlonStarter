@@ -49,7 +49,7 @@ class RunnerList(QDialog, Ui_runnerListDialog):
             timeItem.setEditable(False)
             colorItem = QStandardItem("")
             colorItem.setEditable(False)
-            if (currRunner-1 > index):
+            if ((currRunner-1 >= len(data)) or (index < currRunner-1)):
                 colorItem.setBackground(self.greenBrush)
             else:
                 colorItem.setBackground(self.redBrush)
