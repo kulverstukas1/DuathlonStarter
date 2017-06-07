@@ -35,6 +35,14 @@ class RunnerList(QDialog, Ui_runnerListDialog):
             self.runnerList.setSelectionMode(QAbstractItemView.NoSelection)
             self.greenBrush = QBrush(QtCore.Qt.green)
             self.redBrush = QBrush(QtCore.Qt.red)
+        ph = self.parent.geometry().height()
+        pw = self.parent.geometry().width()
+        px = self.parent.geometry().x()
+        py = self.parent.geometry().y()
+        dw = self.runnerListDialog.width()
+        dh = self.runnerListDialog.height()
+        # this is how we center the list dialog relative to the main window
+        self.runnerListDialog.setGeometry(px+pw+5, py-((dh-ph)/2), dw, dh)
         self.prepRunnerList(self.runnerList, data, currRunner)
     
     ''' Prepares as list of runners with loaded data '''
