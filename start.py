@@ -57,6 +57,8 @@ class Start(QMainWindow, Ui_MainWindow):
         self.stopBtn.clicked.connect(self.stopBtnClicked)
         self.resetBtn.clicked.connect(self.resetBtnClicked)
             
+        self.checkSettings()
+            
     ''' Event that fires when we're closing the main window '''
     def closeEvent(self, event):
         # If the timer is running, then ask to confirm
@@ -72,23 +74,6 @@ class Start(QMainWindow, Ui_MainWindow):
         else:
             event.accept()
 
-    ''' Event that fires when we're about to show the main window '''
-    def showEvent(self, event):
-        # if the sound file doesn't exist then show a warning
-        msg = QMessageBox()
-        msg.setWindowIcon(self.windowIcon)
-        msg.addButton(QMessageBox.Ok)
-        if (not os.path.isfile(self.configs.getSoundFileName())):
-            msg.setIcon(QMessageBox.Warning)
-            msg.setWindowTitle("Klaida")
-            msg.setText("Nurodytas garso failas (%s) neegzistuoja." % self.configs.getSoundFileName())
-            msg.exec_()
-        if (self.configs.resetPreStartSecs()):
-            self.configs.resetPreStartSecs()
-            msg.setIcon(QMessageBox.Information)
-            msg.setWindowTitle("Įspėjimas")
-            msg.setText("Nurodytos sekundės nėra skaičius. Atstatyta į %d." % self.configs.getSecsBeforeFirst())
-            msg.exec_()
 #=========================================================
     ''' Callback for a timer ticker '''
     def timerTickCallback(self):
@@ -196,6 +181,24 @@ class Start(QMainWindow, Ui_MainWindow):
         self.runnerList.resetColor()
         self.currRunnerMillisDiff = 0
         self.populateGui()
+#=========================================================
+    ''' Check if loaded settings are correct and show a message if not '''
+    def checkSettings(self):
+        # if the sound file doesn't exist then show a warning
+        msg = QMessageBox()
+        msg.setWindowIcon(self.windowIcon)
+        msg.addButton(QMessageBox.Ok)
+        if (not os.path.isfile(self.configs.getSoundFileName())):
+            msg.setIcon(QMessageBox.Warning)
+            msg.setWindowTitle("Klaida")
+            msg.setText("Nurodytas garso failas (%s) neegzistuoja." % self.configs.getSoundFileName())
+            msg.exec_()
+        if (self.configs.resetPreStartSecs()):
+            self.configs.resetPreStartSecs()
+            msg.setIcon(QMessageBox.Information)
+            msg.setWindowTitle("Įspėjimas")
+            msg.setText("Nurodytos sekundės nėra skaičius. Atstatyta į %d." % self.configs.getSecsBeforeFirst())
+            msg.exec_()
 #=========================================================
     ''' Here we check if the selected/entered data is valid and can be parsed '''
     def checkData(self, data, dialog):
