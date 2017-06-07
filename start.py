@@ -47,7 +47,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.action_information.triggered.connect(self.aboutMenuClicked)
         self.action_fromMemory.triggered.connect(self.fromMemoryMenuClicked)
         self.action_fromFile.triggered.connect(self.fromFileMenuClicked)
-        self.action_nustatymai.triggered.connect(lambda: self.configs.showSettingsDialog(self))
+        self.action_settings.triggered.connect(lambda: self.configs.showSettingsDialog(self))
         self.action_runnerList.triggered.connect(lambda: self.runnerList.showRunnerListDialog(
             self.dataParser.getAllData(),
             self.dataParser.getCurrentRunnerNum()
@@ -124,7 +124,7 @@ class Start(QMainWindow, Ui_MainWindow):
                 self.startBtn.setEnabled(True)
                 self.stopBtn.setEnabled(False)
                 self.resetBtn.setEnabled(True)
-                self.menubar.setEnabled(True)
+                self.enableMenuBarItems()
 #=========================================================
     ''' Shows information about this program '''
     def aboutMenuClicked(self):
@@ -176,7 +176,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.startBtn.setEnabled(False)
         self.stopBtn.setEnabled(True)
         self.resetBtn.setEnabled(False)
-        self.menubar.setEnabled(False)
+        self.disableMenuBarItems()
         self.runnerTimer.start(self.TIMER_FREQUENCY)
     #------------
     ''' Stops the timer but doesn't reset anything '''
@@ -184,8 +184,8 @@ class Start(QMainWindow, Ui_MainWindow):
         self.startBtn.setEnabled(True)
         self.stopBtn.setEnabled(False)
         self.resetBtn.setEnabled(True)
-        self.menubar.setEnabled(True)
         self.runnerTimer.stop()
+        self.enableMenuBarItems()
     #------------
     ''' Resets the whole counter as if data was just loaded '''
     def resetBtnClicked(self):
@@ -205,6 +205,18 @@ class Start(QMainWindow, Ui_MainWindow):
         else:
             QMessageBox.critical(self, "Klaida", "Bloga duomenų struktūra", QMessageBox.Ok)
         return verified
+#=========================================================
+    ''' Enables needed menu bar items '''
+    def enableMenuBarItems(self):
+        self.menuData.setEnabled(True)
+        self.menuSettings.setEnabled(True)
+        self.menuAbout.setEnabled(True)
+    #------------
+    ''' Disables needed menu bar items '''
+    def disableMenuBarItems(self):
+        self.menuData.setEnabled(False)
+        self.menuSettings.setEnabled(False)
+        self.menuAbout.setEnabled(False)
 #=========================================================
     ''' Populates the main GUI with data we have loaded and preps DataParser '''
     def populateGui(self):

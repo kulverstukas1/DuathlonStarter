@@ -236,7 +236,7 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuApie">
+   <widget class="QMenu" name="menuAbout">
     <property name="title">
      <string>Apie</string>
     </property>
@@ -249,13 +249,13 @@
     <addaction name="action_fromFile"/>
     <addaction name="action_fromMemory"/>
    </widget>
-   <widget class="QMenu" name="menuNustatymai">
+   <widget class="QMenu" name="menuSettings">
     <property name="title">
      <string>Nustatymai</string>
     </property>
-    <addaction name="action_nustatymai"/>
+    <addaction name="action_settings"/>
    </widget>
-   <widget class="QMenu" name="menuVaizdas">
+   <widget class="QMenu" name="menuDisplay">
     <property name="title">
      <string>Vaizdas</string>
     </property>
@@ -263,9 +263,9 @@
     <addaction name="action_bigTimer"/>
    </widget>
    <addaction name="menuData"/>
-   <addaction name="menuVaizdas"/>
-   <addaction name="menuNustatymai"/>
-   <addaction name="menuApie"/>
+   <addaction name="menuDisplay"/>
+   <addaction name="menuSettings"/>
+   <addaction name="menuAbout"/>
   </widget>
   <action name="action_fromFile">
    <property name="text">
@@ -288,7 +288,7 @@
     <string>Informacija</string>
    </property>
   </action>
-  <action name="action_nustatymai">
+  <action name="action_settings">
    <property name="text">
     <string>Nustatymai</string>
    </property>
