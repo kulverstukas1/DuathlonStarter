@@ -39,7 +39,7 @@ class RunnerList(QDialog, Ui_runnerListDialog):
     
     ''' Prepares as list of runners with loaded data '''
     def prepRunnerList(self, listObj, data, currRunner):
-        headers = ['Bėgikas', 'Laikas', 'Paleistas']
+        headers = ['Laikas', 'Bėgikas', 'Paleistas']
         listModel = QStandardItemModel(0, len(headers))
         listModel.setHorizontalHeaderLabels(headers)
         for index, item in enumerate(data):
@@ -53,7 +53,7 @@ class RunnerList(QDialog, Ui_runnerListDialog):
                 colorItem.setBackground(self.greenBrush)
             else:
                 colorItem.setBackground(self.redBrush)
-            listModel.appendRow([runnerItem, timeItem, colorItem])
+            listModel.appendRow([timeItem, runnerItem, colorItem])
         listObj.setModel(listModel)
     
     ''' Resets the last column color to red for all runners '''

@@ -124,6 +124,7 @@ class Start(QMainWindow, Ui_MainWindow):
                 self.stopBtn.setEnabled(False)
                 self.resetBtn.setEnabled(True)
                 self.enableMenuBarItems()
+            # need to call this here, for RunnerList to work properly
             self.dataParser.setOnNextRunner()
 #=========================================================
     ''' Shows information about this program '''
