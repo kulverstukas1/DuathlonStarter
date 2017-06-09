@@ -5,7 +5,7 @@ class DataParser:
     
     #=====================================================
     # Needed for data validation
-    DATA_STRUCTURE_REGEX = "^[\d\w\s\.,]+\t\d{2}:\d{2},\d{1}$";
+    DATA_STRUCTURE_REGEX = "^[\d\w\s\.,]+\t\d{1,2}:\d{1,2},\d{1}$";
     # Needed for time validation
     TIME_FORMAT = "%M:%S,%f"
     # Here we hold our loaded runner data
@@ -96,7 +96,10 @@ class DataParser:
         except:
             return "ER:ER,E"
 #=========================================================
-    ''' Function that is used in sorted() to sort out given times '''
+    '''
+        Function that is used in sorted() to sort out given times.
+        This works by padding minutes with 0 for a unified format.
+    '''
     def sortingKey(self, s):
-        return s.split("\t")[1]
+        return ":".join(s.split("\t")[1].split(":")[0].zfill(2))
 #=========================================================
