@@ -19,6 +19,21 @@ class DataParser:
 
 #=========================================================
     '''
+        If data is from 2 arays (runner nr. and times are separate)
+        then we need to join them before processing
+    '''
+    def joinRunnerData(self, data):
+        if ((type(data) == list) and (len(data) == 2)):
+            runnerNrs = data[0].split("\n")
+            runnerTimes = data[1].split("\n")
+            if (len(runnerNrs) == len(runnerTimes)):
+                return "\n".join([runnerNr.strip()+"\t"+runnerTimes[i].strip() for i, runnerNr in enumerate(runnerNrs)])
+            else:
+                return ""
+        else:
+            return ""
+#=========================================================
+    '''
         Data structure verification happens by checking each line with
         regex, if the line doesn't match, then the format is invalid.
     '''

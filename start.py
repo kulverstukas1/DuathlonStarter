@@ -128,18 +128,45 @@ class Start(QMainWindow, Ui_MainWindow):
             QtCore.Qt.WindowTitleHint|QtCore.Qt.WindowCloseButtonHint)
         ui = Ui_fromMemoryDialog()
         ui.setupUi(self.fromMemoryDialog)
-        ui.dataText.setFocus()
+        ui.dataText.setVisible(False)
+        ui.runnerNrDataText.setFocus()
         self.fromMemoryDialog.setFixedSize(self.fromMemoryDialog.size())
-        ui.clearBtn.clicked.connect(ui.dataText.clear)
+        ui.clearBtn.clicked.connect(lambda: clearBtnCallback(ui))
         ui.cancelBtn.clicked.connect(self.fromMemoryDialog.close)
         ui.okBtn.clicked.connect(lambda: okBtnCallback(self.fromMemoryDialog, ui))
+        ui.inputMethodToggle.stateChanged.connect(lambda: checkBoxCallback(ui))
         self.fromMemoryDialog.show()
-        # inner button callback
+        #------------
         def okBtnCallback(dialog, ui):
-            data = ui.dataText.toPlainText().strip()
+            if (ui.inputMethodToggle.isChecked()):
+                data = ui.dataText.toPlainText().strip()
+            else:
+                data = self.dataParser.joinRunnerData(
+                    [ui.runnerNrDataText.toPlainText().strip(),
+                    ui.runnerTimeDataText.toPlainText().strip()])
             if (self.checkData(data, dialog)):
                 self.dataParser.loadData(data)
                 self.populateGui()
+        #------------
+        def checkBoxCallback(ui):
+            if (ui.inputMethodToggle.isChecked()):
+                ui.dataText.setVisible(True)
+                ui.dataText.setFocus()
+                ui.runnerTimeDataText.clear()
+                ui.runnerNrDataText.clear()
+                ui.runnerDataFrame.setVisible(False)
+            else:
+                ui.dataText.clear()
+                ui.dataText.setVisible(False)
+                ui.runnerDataFrame.setVisible(True)
+                ui.runnerNrDataText.setFocus()
+        #------------
+        def clearBtnCallback(ui):
+            if (ui.inputMethodToggle.isChecked()):
+                ui.dataText.clear()
+            else:
+                ui.runnerTimeDataText.clear()
+                ui.runnerNrDataText.clear()
     #------------
     ''' Shows a file selection dialog to select the data file and load it '''
     def fromFileMenuClicked(self):
