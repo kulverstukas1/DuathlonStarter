@@ -9,6 +9,7 @@ from LoadDataDialog import Ui_fromMemoryDialog
 from DataParser import DataParser
 from ConfigHolder import ConfigHolder
 from RunnerList import RunnerList
+from BigClock import BigClock
 
 class Start(QMainWindow, Ui_MainWindow):
     
@@ -24,6 +25,7 @@ class Start(QMainWindow, Ui_MainWindow):
     runnerTimer = None
     windowIcon = None
     runnerList = None
+    bigClock = None
     # Needed for timekeeping
     currRunnerMillisDiff = 0
     TIMER_FREQUENCY = 10
@@ -34,6 +36,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.dataParser = DataParser()
         self.configs = ConfigHolder()
         self.runnerList = RunnerList(self)
+        self.bigClock = BigClock(self)
         self.runnerTimer = QtCore.QTimer(self)
         self.runnerTimer.timeout.connect(self.timerTickCallback)
         self.setupUi(self)
@@ -48,6 +51,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.action_fromMemory.triggered.connect(self.fromMemoryMenuClicked)
         self.action_fromFile.triggered.connect(self.fromFileMenuClicked)
         self.action_settings.triggered.connect(lambda: self.configs.showSettingsDialog(self))
+        self.action_bigTimer.triggered.connect(self.showBigClockDialog)
         self.action_runnerList.triggered.connect(lambda: self.runnerList.showRunnerListDialog(
             self.dataParser.getAllData(),
             self.dataParser.getCurrentRunnerNum()
@@ -208,6 +212,9 @@ class Start(QMainWindow, Ui_MainWindow):
         self.runnerList.resetColor()
         self.currRunnerMillisDiff = 0
         self.populateGui()
+    #------------
+    def showBigClockDialog(self):
+        self.bigClock.showBigClockDialog()
 #=========================================================
     ''' Check if loaded settings are correct and show a message if not '''
     def checkSettings(self):
