@@ -213,6 +213,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.currRunnerMillisDiff = 0
         self.populateGui()
     #------------
+    ''' Shows a big timer clock for everyone to see '''
     def showBigClockDialog(self):
         self.bigClock.showBigClockDialog()
 #=========================================================

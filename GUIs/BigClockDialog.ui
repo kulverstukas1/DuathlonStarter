@@ -9,24 +9,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>330</height>
+    <width>730</width>
+    <height>430</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>640</width>
-    <height>330</height>
+    <width>730</width>
+    <height>430</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Didelis laikmatis</string>
-  </property>
-  <property name="autoFillBackground">
-   <bool>false</bool>
-  </property>
-  <property name="modal">
-   <bool>false</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="sizeConstraint">
@@ -37,11 +31,9 @@
      <property name="font">
       <font>
        <family>Consolas</family>
-       <pointsize>80</pointsize>
+       <pointsize>120</pointsize>
        <weight>75</weight>
        <bold>true</bold>
-       <stylestrategy>PreferDefault</stylestrategy>
-       <kerning>true</kerning>
       </font>
      </property>
      <property name="frameShape">
@@ -80,11 +72,9 @@
        <widget class="QGroupBox" name="currRunnerBox">
         <property name="font">
          <font>
-          <pointsize>22</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-          <underline>false</underline>
-          <kerning>true</kerning>
+          <pointsize>30</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="title">
@@ -99,31 +89,35 @@
         <property name="checkable">
          <bool>false</bool>
         </property>
-        <widget class="QLabel" name="currRunnerLabel">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>50</y>
-           <width>231</width>
-           <height>51</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <widget class="QLabel" name="currRunnerLabel">
+           <property name="font">
+            <font>
+             <pointsize>40</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
        <widget class="QGroupBox" name="nextRunnerBox">
         <property name="font">
          <font>
-          <pointsize>22</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-          <underline>false</underline>
-          <kerning>true</kerning>
+          <pointsize>30</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
         </property>
         <property name="title">
          <string>Ruošiasi</string>
@@ -137,30 +131,22 @@
         <property name="checkable">
          <bool>false</bool>
         </property>
-        <widget class="QLabel" name="nextRunnerLabel">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>50</y>
-           <width>231</width>
-           <height>51</height>
-          </rect>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-        <zorder>nextRunnerLabel</zorder>
-        <zorder>currRunnerBox</zorder>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="nextRunnerLabel">
+           <property name="font">
+            <font>
+             <pointsize>40</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
