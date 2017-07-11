@@ -42,6 +42,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setFixedSize(self.size())
         
+        
         self.windowIcon = QtGui.QIcon()
         self.windowIcon.addPixmap(QtGui.QPixmap(self.resource_path("images/program_icon.ico")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         
@@ -77,7 +78,6 @@ class Start(QMainWindow, Ui_MainWindow):
                 event.ignore()
         else:
             event.accept()
-
 #=========================================================
     ''' Callback for a timer ticker '''
     def timerTickCallback(self):

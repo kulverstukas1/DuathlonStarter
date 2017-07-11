@@ -18,6 +18,7 @@ class BigClock(QDialog, Ui_bigClockDialog):
             QtCore.Qt.WindowTitleHint|QtCore.Qt.WindowCloseButtonHint)
             ui = Ui_bigClockDialog()
             ui.setupUi(self.bigClockDialog)
+            self.bigClockDialog.resizeEvent = self.resizeEvent
         ph = self.parent.geometry().height()
         pw = self.parent.geometry().width()
         px = self.parent.geometry().x()
@@ -27,3 +28,7 @@ class BigClock(QDialog, Ui_bigClockDialog):
         # this is how we center the list dialog relative to the main window
         self.bigClockDialog.setGeometry(px-dw-5, py-((dh-ph)/2), dw, dh)
         self.bigClockDialog.show()
+        
+    def resizeEvent(self, event):
+        print(event.size())
+        event.ignore()
