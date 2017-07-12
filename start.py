@@ -83,7 +83,9 @@ class Start(QMainWindow, Ui_MainWindow):
     def timerTickCallback(self):
         if (self.currRunnerMillisDiff > 0):
             self.currRunnerMillisDiff -= self.TIMER_FREQUENCY
-            self.timerLabel.setText(self.dataParser.formatMillis(self.currRunnerMillisDiff))
+            millisText = self.dataParser.formatMillis(self.currRunnerMillisDiff)
+            self.timerLabel.setText(millisText)
+            self.bigClock.updateTimeLabel(millisText)
         else:
             if (self.dataParser.getCurrentRunnerNum() > 0):
                 winsound.PlaySound(self.configs.getSoundFileName(), winsound.SND_ASYNC)
@@ -97,11 +99,13 @@ class Start(QMainWindow, Ui_MainWindow):
                     (self.dataParser.getCurrentRunnerNum()+1, self.dataParser.getTotalRunners()))
                 self.currentRunnerNr.setText("Dalyvis: %s" % currentRunner["runnerNr"])
                 self.currentRunnerTime.setText("Laikas: %s" % currentRunner["time"])
+                self.bigClock.updateCurrRunnerLabel(currentRunner["runnerNr"])
                 
                 nextRunner = self.dataParser.getNextRunner()
                 if (not nextRunner): nextRunner = {"runnerNr":"---", "time":"---","timeInMillis":0}
                 self.nextRunnerNr.setText("Dalyvis: %s" % nextRunner["runnerNr"])
                 self.nextRunnerTime.setText("Laikas: %s" % nextRunner["time"])
+                self.bigClock.updateNextRunnerLabel(nextRunner["runnerNr"])
                 self.currentDifference.setText(
                     self.dataParser.formatMillis(
                         nextRunner['timeInMillis']-currentRunner["timeInMillis"]

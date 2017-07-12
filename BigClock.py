@@ -34,26 +34,53 @@ class BigClock(QDialog, Ui_bigClockDialog):
         QtCore.Qt.WindowTitleHint|QtCore.Qt.WindowCloseButtonHint)
         self.ui = Ui_bigClockDialog()
         self.ui.setupUi(self.bigClockDialog)
-        self.bigClockDialog.resizeEvent = self.resizeEvent
+        # self.bigClockDialog.resizeEvent = self.resizeEvent
+        self.ui.nextRunnerLabel.setText("")
+        self.ui.currRunnerLabel.setText("")
+        self.ui.timerLabel.setText("00:00,0")
         # need to set pixel size same as point size, so that resizeEvent() works ok initialy
         # Qt Designer only allows setting font size in points
-        f = self.ui.nextRunnerLabel.font()
-        f.setPixelSize(f.pointSize())
-        self.ui.nextRunnerLabel.setFont(f)
-        self.ui.currRunnerLabel.setFont(f)
-        f = self.ui.timerLabel.font()
-        f.setPixelSize(f.pointSize())
-        self.ui.timerLabel.setFont(f)
+        # f = self.ui.nextRunnerLabel.font()
+        # f.setPixelSize(f.pointSize())
+        # self.ui.nextRunnerLabel.setFont(f)
+        # self.ui.currRunnerLabel.setFont(f)
+        # f = self.ui.timerLabel.font()
+        # f.setPixelSize(f.pointSize())
+        # self.ui.timerLabel.setFont(f)
     
-    ''' This event adjusts the label font sizes whenever a dialog is resized '''
+    ''' Updates this dialog with given formatted time '''
+    def updateTimeLabel(self, time):
+        if (self.ui is not None):
+            self.ui.timerLabel.setText(time)
+        
+    ''' Updates this dialog with given next runner name '''
+    def updateNextRunnerLabel(self, nextRunner):
+        if (self.ui is not None):
+            self.ui.nextRunnerLabel.setText(nextRunner)
+        
+    ''' Updates this dialog with given current runner name '''
+    def updateCurrRunnerLabel(self, currRunner):
+        if (self.ui is not None):
+            self.ui.currRunnerLabel.setText(currRunner)
+    
+    '''
+        This event adjusts the label font sizes whenever a dialog is resized.
+        Not used, because makes everything a bit messy
+    '''
+    '''
     def resizeEvent(self, event):
         dw = event.size().width() - event.oldSize().width()   # width change
         dh = event.size().height() - event.oldSize().height() # height change
         self.resizeLabel(self.ui.nextRunnerLabel, dw, dh)
         self.resizeLabel(self.ui.currRunnerLabel, dw, dh)
         self.resizeLabel(self.ui.timerLabel, dw, dh)
+    '''
         
-    ''' Worker function that does the actual font resizing on a given label '''
+    '''
+        Worker function that does the actual font resizing on a given label.
+        Not used, because makes everything a bit messy.
+    '''
+    '''
     def resizeLabel(self, label, dw, dh):
         # fetch current parameters
         f = label.font()
@@ -76,3 +103,4 @@ class BigClock(QDialog, Ui_bigClockDialog):
             if (fs < 1): break
         # update font size
         label.setFont(f)
+    '''
