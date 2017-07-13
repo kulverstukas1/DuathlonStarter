@@ -280,8 +280,8 @@ class Start(QMainWindow, Ui_MainWindow):
         self.nextRunnerNr.setElidedText("Dalyvis: %s" % currentRunner["runnerNr"])
         self.nextRunnerTime.setText("Laikas: %s" % currentRunner["time"])
 #=========================================================
+    ''' Get absolute path to resource, works for dev and for PyInstaller '''
     def resource_path(self, relative_path):
-        """ Get absolute path to resource, works for dev and for PyInstaller """
         try:
             # PyInstaller creates a temp folder and stores path in _MEIPASS
             base_path = sys._MEIPASS
