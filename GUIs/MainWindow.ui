@@ -33,6 +33,12 @@
       <height>71</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="title">
      <string>Bus paleistas</string>
     </property>
@@ -42,14 +48,20 @@
     <property name="checkable">
      <bool>false</bool>
     </property>
-    <widget class="QLabel" name="currentRunnerNr">
+    <widget class="QElidingLabel" name="currentRunnerNr">
      <property name="geometry">
       <rect>
        <x>20</x>
        <y>20</y>
-       <width>91</width>
+       <width>111</width>
        <height>16</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="text">
       <string>Dalyvis:</string>
@@ -60,9 +72,15 @@
       <rect>
        <x>20</x>
        <y>40</y>
-       <width>91</width>
+       <width>111</width>
        <height>16</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="text">
       <string>Laikas:</string>
@@ -78,17 +96,29 @@
       <height>71</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="title">
      <string>Sekantis</string>
     </property>
-    <widget class="QLabel" name="nextRunnerNr">
+    <widget class="QElidingLabel" name="nextRunnerNr">
      <property name="geometry">
       <rect>
        <x>20</x>
        <y>20</y>
-       <width>91</width>
+       <width>111</width>
        <height>16</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="text">
       <string>Dalyvis:</string>
@@ -99,9 +129,15 @@
       <rect>
        <x>20</x>
        <y>40</y>
-       <width>91</width>
+       <width>111</width>
        <height>16</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="text">
       <string>Laikas:</string>
@@ -209,8 +245,17 @@
       <height>51</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="title">
      <string>Skirtumas</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
     <widget class="QLabel" name="currentDifference">
      <property name="geometry">
@@ -220,6 +265,12 @@
        <width>41</width>
        <height>16</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="text">
       <string>00:00,0</string>
@@ -304,6 +355,13 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QElidingLabel</class>
+   <extends>QLabel</extends>
+   <header>QElidingLabel</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

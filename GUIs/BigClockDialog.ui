@@ -91,7 +91,7 @@
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
          <item row="0" column="0">
-          <widget class="QLabel" name="currRunnerLabel">
+          <widget class="QElidingLabel" name="currRunnerLabel">
            <property name="font">
             <font>
              <pointsize>40</pointsize>
@@ -142,7 +142,7 @@
         </property>
         <layout class="QGridLayout" name="gridLayout">
          <item row="0" column="0">
-          <widget class="QLabel" name="nextRunnerLabel">
+          <widget class="QElidingLabel" name="nextRunnerLabel">
            <property name="font">
             <font>
              <pointsize>40</pointsize>
@@ -172,6 +172,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QElidingLabel</class>
+   <extends>QLabel</extends>
+   <header>QElidingLabel</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
