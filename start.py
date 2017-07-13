@@ -96,13 +96,13 @@ class Start(QMainWindow, Ui_MainWindow):
                 self.currRunnerMillisDiff = currentRunner["timeDiff"]
                 self.currentRunnerGroup.setTitle("Bus paleistas: %d iš %d" %
                     (self.dataParser.getCurrentRunnerNum()+1, self.dataParser.getTotalRunners()))
-                self.currentRunnerNr.setText("Dalyvis: %s" % currentRunner["runnerNr"])
+                self.currentRunnerNr.setElidedText("Dalyvis: %s" % currentRunner["runnerNr"])
                 self.currentRunnerTime.setText("Laikas: %s" % currentRunner["time"])
                 self.bigClock.updateCurrRunnerLabel(currentRunner["runnerNr"])
                 
                 nextRunner = self.dataParser.getNextRunner()
                 if (not nextRunner): nextRunner = {"runnerNr":"---", "time":"---","timeInMillis":0}
-                self.nextRunnerNr.setText("Dalyvis: %s" % nextRunner["runnerNr"])
+                self.nextRunnerNr.setElidedText("Dalyvis: %s" % nextRunner["runnerNr"])
                 self.nextRunnerTime.setText("Laikas: %s" % nextRunner["time"])
                 self.bigClock.updateNextRunnerLabel(nextRunner["runnerNr"])
                 self.currentDifference.setText(
@@ -277,7 +277,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.currRunnerMillisDiff = 0
         # Data was just loaded, so show the first runner on our list
         currentRunner = self.dataParser.getCurrentRunner()
-        self.nextRunnerNr.setText("Dalyvis: %s" % currentRunner["runnerNr"])
+        self.nextRunnerNr.setElidedText("Dalyvis: %s" % currentRunner["runnerNr"])
         self.nextRunnerTime.setText("Laikas: %s" % currentRunner["time"])
 #=========================================================
     def resource_path(self, relative_path):
