@@ -53,7 +53,7 @@ class Ui_bigClockDialog(object):
         self.currRunnerBox.setObjectName("currRunnerBox")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.currRunnerBox)
         self.gridLayout_2.setObjectName("gridLayout_2")
-        self.currRunnerLabel = QtWidgets.QLabel(self.currRunnerBox)
+        self.currRunnerLabel = QElidingLabel(self.currRunnerBox)
         font = QtGui.QFont()
         font.setPointSize(40)
         font.setBold(False)
@@ -81,7 +81,7 @@ class Ui_bigClockDialog(object):
         self.nextRunnerBox.setObjectName("nextRunnerBox")
         self.gridLayout = QtWidgets.QGridLayout(self.nextRunnerBox)
         self.gridLayout.setObjectName("gridLayout")
-        self.nextRunnerLabel = QtWidgets.QLabel(self.nextRunnerBox)
+        self.nextRunnerLabel = QElidingLabel(self.nextRunnerBox)
         font = QtGui.QFont()
         font.setPointSize(40)
         font.setBold(False)
@@ -107,6 +107,7 @@ class Ui_bigClockDialog(object):
         self.nextRunnerBox.setTitle(_translate("bigClockDialog", "Ruošiasi"))
         self.nextRunnerLabel.setText(_translate("bigClockDialog", "TextLabel"))
 
+from QElidingLabel import QElidingLabel
 
 if __name__ == "__main__":
     import sys
