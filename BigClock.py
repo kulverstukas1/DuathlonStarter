@@ -24,7 +24,7 @@ class BigClock(QDialog, Ui_bigClockDialog):
         py = self.parent.geometry().y()
         dw = self.bigClockDialog.width()
         dh = self.bigClockDialog.height()
-        # this is how we center the list dialog relative to the main window
+        # this is how we center the clock dialog relative to the main window
         self.bigClockDialog.setGeometry(px-dw-5, py-((dh-ph)/2), dw, dh)
         self.bigClockDialog.show()
         
@@ -34,19 +34,9 @@ class BigClock(QDialog, Ui_bigClockDialog):
         QtCore.Qt.WindowTitleHint|QtCore.Qt.WindowCloseButtonHint)
         self.ui = Ui_bigClockDialog()
         self.ui.setupUi(self.bigClockDialog)
-        # self.bigClockDialog.resizeEvent = self.resizeEvent
         self.ui.nextRunnerLabel.setText("")
         self.ui.currRunnerLabel.setText("")
         self.ui.timerLabel.setText("00:00,0")
-        # need to set pixel size same as point size, so that resizeEvent() works ok initialy
-        # Qt Designer only allows setting font size in points
-        # f = self.ui.nextRunnerLabel.font()
-        # f.setPixelSize(f.pointSize())
-        # self.ui.nextRunnerLabel.setFont(f)
-        # self.ui.currRunnerLabel.setFont(f)
-        # f = self.ui.timerLabel.font()
-        # f.setPixelSize(f.pointSize())
-        # self.ui.timerLabel.setFont(f)
     
     ''' Updates this dialog with given formatted time '''
     def updateTimeLabel(self, time):
@@ -62,45 +52,4 @@ class BigClock(QDialog, Ui_bigClockDialog):
     def updateCurrRunnerLabel(self, currRunner):
         if (self.ui is not None):
             self.ui.currRunnerLabel.setText(currRunner)
-    
-    '''
-        This event adjusts the label font sizes whenever a dialog is resized.
-        Not used, because makes everything a bit messy
-    '''
-    '''
-    def resizeEvent(self, event):
-        dw = event.size().width() - event.oldSize().width()   # width change
-        dh = event.size().height() - event.oldSize().height() # height change
-        self.resizeLabel(self.ui.nextRunnerLabel, dw, dh)
-        self.resizeLabel(self.ui.currRunnerLabel, dw, dh)
-        self.resizeLabel(self.ui.timerLabel, dw, dh)
-    '''
         
-    '''
-        Worker function that does the actual font resizing on a given label.
-        Not used, because makes everything a bit messy.
-    '''
-    '''
-    def resizeLabel(self, label, dw, dh):
-        # fetch current parameters
-        f = label.font()
-        cr = label.contentsRect()
-        fs = max(f.pixelSize(), 1)
-        while True:
-            f.setPixelSize(fs)
-            br =  QFontMetrics(f).boundingRect(label.text())
-            if ((dw >= 0) and (dh >= 0)): # label is expanding
-                if ((br.height() <= cr.height()) and (br.width() <= cr.width())):
-                    fs += 1
-                else:
-                    f.setPixelSize(max(fs - 1, 1)) # backtrack
-                    break
-            else: # label is shrinking
-                if ((br.height() > cr.height()) or (br.width() > cr.width())):
-                    fs -= 1
-                else:
-                    break
-            if (fs < 1): break
-        # update font size
-        label.setFont(f)
-    '''
