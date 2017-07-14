@@ -98,24 +98,24 @@ class Start(QMainWindow, Ui_MainWindow):
                     (self.dataParser.getCurrentRunnerNum()+1, self.dataParser.getTotalRunners()))
                 self.currentRunnerNr.setElidedText("Dalyvis: %s" % currentRunner["runnerNr"])
                 self.currentRunnerTime.setText("Laikas: %s" % currentRunner["time"])
-                self.bigClock.updateCurrRunnerLabel(currentRunner["runnerNr"])
                 
                 nextRunner = self.dataParser.getNextRunner()
                 if (not nextRunner): nextRunner = {"runnerNr":"---", "time":"---","timeInMillis":0}
                 self.nextRunnerNr.setElidedText("Dalyvis: %s" % nextRunner["runnerNr"])
                 self.nextRunnerTime.setText("Laikas: %s" % nextRunner["time"])
-                self.bigClock.updateNextRunnerLabel(nextRunner["runnerNr"])
                 self.currentDifference.setText(
                     self.dataParser.formatMillis(
                         nextRunner['timeInMillis']-currentRunner["timeInMillis"]
                     ) if (nextRunner['timeInMillis'] > currentRunner["timeInMillis"]) else "---"
                 )
+                self.bigClock.updateRunnerLabels(currentRunner["runnerNr"])
             else:
                 self.runnerTimer.stop()
                 self.startBtn.setEnabled(True)
                 self.stopBtn.setEnabled(False)
                 self.resetBtn.setEnabled(True)
                 self.enableMenuBarItems()
+                self.bigClock.updateRunnerLabels("---")
             # need to call this here, for RunnerList to work properly
             self.dataParser.setOnNextRunner()
 #=========================================================
@@ -279,6 +279,8 @@ class Start(QMainWindow, Ui_MainWindow):
         currentRunner = self.dataParser.getCurrentRunner()
         self.nextRunnerNr.setElidedText("Dalyvis: %s" % currentRunner["runnerNr"])
         self.nextRunnerTime.setText("Laikas: %s" % currentRunner["time"])
+        self.bigClock.updateTimeLabel("00:00,0")
+        # self.bigClock.updateRunnerLabels(currentRunner["runnerNr"])
 #=========================================================
     ''' Get absolute path to resource, works for dev and for PyInstaller '''
     def resource_path(self, relative_path):

@@ -1,3 +1,3 @@
-Renardas Gruodis	0:04,3
-Tomas Vainauskas	01:10,9
-Dalia Grybauskaite	0:06,4
+Renardas Gruodis	00:04,3
+Dalia Grybauskaite	00:10,4
+Tomas Vainauskas	00:15,9

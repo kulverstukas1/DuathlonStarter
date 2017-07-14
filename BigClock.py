@@ -9,6 +9,7 @@ class BigClock(QDialog, Ui_bigClockDialog):
     parent = None
     bigClockDialog = None
     ui = None
+    runnerInfo = {"current": "---", "next": "---"}
     
     def __init__(self, parent=None, name=None):
         super(BigClock, self).__init__(parent)
@@ -43,13 +44,11 @@ class BigClock(QDialog, Ui_bigClockDialog):
         if (self.ui is not None):
             self.ui.timerLabel.setText(time)
         
-    ''' Updates this dialog with given next runner name '''
-    def updateNextRunnerLabel(self, nextRunner):
+    ''' Updates this dialog with runner status. Moves next to current '''
+    def updateRunnerLabels(self, runner):
         if (self.ui is not None):
-            self.ui.nextRunnerLabel.setText(nextRunner)
-        
-    ''' Updates this dialog with given current runner name '''
-    def updateCurrRunnerLabel(self, currRunner):
-        if (self.ui is not None):
-            self.ui.currRunnerLabel.setText(currRunner)
+            self.runnerInfo["current"] = self.runnerInfo["next"]
+            self.runnerInfo["next"] = runner
+            self.ui.currRunnerLabel.setText(self.runnerInfo["current"])
+            self.ui.nextRunnerLabel.setText(self.runnerInfo["next"])
         
