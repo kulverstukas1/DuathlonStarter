@@ -34,7 +34,7 @@ class BigClock(QDialog, Ui_bigClockDialog):
     ''' For setting up a dialog interface for the first time '''
     def setupDialog(self):
         self.bigClockDialog = QDialog(self.parent,
-        QtCore.Qt.WindowTitleHint|QtCore.Qt.WindowCloseButtonHint)
+        QtCore.Qt.WindowCloseButtonHint|QtCore.Qt.WindowMaximizeButtonHint)
         self.ui = Ui_bigClockDialog()
         self.ui.setupUi(self.bigClockDialog)
         self.ui.nextRunnerLabel.setText("")
