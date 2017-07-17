@@ -12,6 +12,11 @@ from PyQt5.QtGui import QFontMetrics
         Header file: QElidingLabel
         Global include: unchecked
     This way QElidingLabel is always set when UI is compiled.
+    
+    NOTICE:
+        There are some problems. This elides a text that
+        doesn't fit into a single line, even if label is high
+        enough to fit the text on two lines.
 '''
 
 class QElidingLabel(QtWidgets.QLabel):

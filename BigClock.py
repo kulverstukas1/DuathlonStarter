@@ -9,7 +9,7 @@ class BigClock(QDialog, Ui_bigClockDialog):
     bigClockDialog = None
     ui = None
     runnerInfo = {"current": "---", "next": "---"}
-    baseDialogSize = [730, 400] # width x height
+    baseDialogSize = [730, 440] # width x height
     baseLabelSizes = {"timer": 120, "runner": 40}
     
     def __init__(self, parent=None, name=None):
