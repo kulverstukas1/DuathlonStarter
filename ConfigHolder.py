@@ -48,7 +48,7 @@ class ConfigHolder:
             self.DEFAULTS["secs_before_first"][0],
             fallback = self.DEFAULTS["secs_before_first"][1]))
 #=========================================================
-    def getBigClockSize(self):
+    def getBigClockSizeIncrease(self):
         return int(self.configs.get(self.DEFAULT_SECTION,
             self.DEFAULTS["big_clock_size"][0],
             fallback = self.DEFAULTS["big_clock_size"][1]))

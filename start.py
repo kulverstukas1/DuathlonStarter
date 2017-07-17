@@ -218,7 +218,7 @@ class Start(QMainWindow, Ui_MainWindow):
     #------------
     ''' Shows a big timer clock for everyone to see '''
     def showBigClockDialog(self):
-        self.bigClock.showBigClockDialog(self.configs.getBigClockSize())
+        self.bigClock.showBigClockDialog(self.configs.getBigClockSizeIncrease())
 #=========================================================
     ''' Check if loaded settings are correct and show a message if not '''
     def checkSettings(self):
