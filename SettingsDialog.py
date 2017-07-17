@@ -44,7 +44,7 @@ class Ui_settingsDialog(object):
         self.bigClockSize = QtWidgets.QSpinBox(self.groupBox_3)
         self.bigClockSize.setGeometry(QtCore.QRect(20, 20, 51, 22))
         self.bigClockSize.setMinimum(0)
-        self.bigClockSize.setMaximum(50)
+        self.bigClockSize.setMaximum(100)
         self.bigClockSize.setSingleStep(5)
         self.bigClockSize.setProperty("value", 0)
         self.bigClockSize.setObjectName("bigClockSize")

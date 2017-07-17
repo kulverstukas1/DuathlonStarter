@@ -12,8 +12,8 @@ class Ui_bigClockDialog(object):
     def setupUi(self, bigClockDialog):
         bigClockDialog.setObjectName("bigClockDialog")
         bigClockDialog.setWindowModality(QtCore.Qt.NonModal)
-        bigClockDialog.resize(730, 510)
-        bigClockDialog.setMinimumSize(QtCore.QSize(730, 510))
+        bigClockDialog.resize(730, 400)
+        bigClockDialog.setMinimumSize(QtCore.QSize(730, 400))
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(bigClockDialog)
         self.verticalLayout_2.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
