@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>361</width>
-    <height>126</height>
+    <height>177</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -61,9 +61,9 @@
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>230</x>
      <y>10</y>
-     <width>111</width>
+     <width>121</width>
      <height>51</height>
     </rect>
    </property>
@@ -73,7 +73,7 @@
    <widget class="QSpinBox" name="preStartSecs">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>20</y>
       <width>51</width>
       <height>22</height>
@@ -91,7 +91,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>90</y>
+     <y>140</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -104,7 +104,7 @@
    <property name="geometry">
     <rect>
      <x>90</x>
-     <y>90</y>
+     <y>140</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -112,6 +112,44 @@
    <property name="text">
     <string>Atšaukti</string>
    </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_3">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>70</y>
+     <width>121</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Didelio laimačio dydis</string>
+   </property>
+   <widget class="QSpinBox" name="bigClockSize">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>51</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="suffix">
+     <string> %</string>
+    </property>
+    <property name="minimum">
+     <number>0</number>
+    </property>
+    <property name="maximum">
+     <number>50</number>
+    </property>
+    <property name="singleStep">
+     <number>5</number>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

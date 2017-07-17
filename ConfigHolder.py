@@ -12,7 +12,8 @@ class ConfigHolder:
     DEFAULT_SECTION = "MAIN"
     DEFAULTS = {
         "sound_file": ("sound_file", "sounds/quack.wav"),
-        "secs_before_first": ("secs_before_first", "5")
+        "secs_before_first": ("secs_before_first", "5"),
+        "big_clock_size": ("big_clock_size", "0")
     }
     configs = None
     settingsDialog = None
@@ -47,6 +48,11 @@ class ConfigHolder:
             self.DEFAULTS["secs_before_first"][0],
             fallback = self.DEFAULTS["secs_before_first"][1]))
 #=========================================================
+    def getBigClockSize(self):
+        return int(self.configs.get(self.DEFAULT_SECTION),
+            self.DEFAULTS["big_clock_size"][0],
+            fallback = self.DEFAULTS["big_clock_size"][1])
+#=========================================================
     def resetPreStartSecs(self):
         if (not self.configs.get(self.DEFAULT_SECTION,
             self.DEFAULTS["secs_before_first"][0]).isdigit()):
@@ -66,6 +72,7 @@ class ConfigHolder:
         ui.setupUi(self.settingsDialog)
         ui.soundFilePath.setText(self.configs.get(self.DEFAULT_SECTION, "sound_file"))
         ui.preStartSecs.setValue(int(self.configs.get(self.DEFAULT_SECTION, "secs_before_first")))
+        ui.bigClockSize.setValue(int(self.configs.get(self.DEFAULT_SECTION, "big_clock_size")))
         ui.selectSoundFile.clicked.connect(lambda: selectSoundFileBtnCallback(ui))
         ui.okBtn.clicked.connect(lambda: okBtnClick(self.settingsDialog, ui))
         ui.cancelBtn.clicked.connect(self.settingsDialog.close)
@@ -82,6 +89,7 @@ class ConfigHolder:
         def okBtnClick(settingsDlg, ui):
             self.configs.set(self.DEFAULT_SECTION, "sound_file", ui.soundFilePath.text())
             self.configs.set(self.DEFAULT_SECTION, "secs_before_first", str(ui.preStartSecs.value()))
+            self.configs.set(self.DEFAULT_SECTION, "big_clock_size", str(ui.bigClockSize.value()))
             self.configs.write(open(self.CONFIG_FILE, "w"))
             settingsDlg.close()
         #---/Callbacks---
