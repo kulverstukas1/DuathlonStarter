@@ -1,5 +1,6 @@
 import sys
 from PyQt5 import QtCore
+from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QFont, QFontMetrics
 from PyQt5.QtWidgets import QDialog
 from BigClockDialog import Ui_bigClockDialog
@@ -10,21 +11,23 @@ class BigClock(QDialog, Ui_bigClockDialog):
     bigClockDialog = None
     ui = None
     runnerInfo = {"current": "---", "next": "---"}
+    baseSize = [730, 510] # width x height
     
     def __init__(self, parent=None, name=None):
         super(BigClock, self).__init__(parent)
         self.parent = parent
         
     ''' Called when a giant-ass clock needs to be shown '''
-    def showBigClockDialog(self):
+    def showBigClockDialog(self, sizeIncrease):
         if (self.bigClockDialog is None):
             self.setupDialog()
+        dw, dh = self.baseSize
+        if (sizeIncrease > 0):
+            dw, dh = [int(size+((size/100)*sizeIncrease)) for size in self.baseSize]
         ph = self.parent.geometry().height()
         pw = self.parent.geometry().width()
         px = self.parent.geometry().x()
         py = self.parent.geometry().y()
-        dw = self.bigClockDialog.width()
-        dh = self.bigClockDialog.height()
         # this is how we center the clock dialog relative to the main window
         self.bigClockDialog.setGeometry(px-dw-5, py-((dh-ph)/2), dw, dh)
         self.bigClockDialog.show()

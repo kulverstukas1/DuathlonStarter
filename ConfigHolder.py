@@ -49,9 +49,9 @@ class ConfigHolder:
             fallback = self.DEFAULTS["secs_before_first"][1]))
 #=========================================================
     def getBigClockSize(self):
-        return int(self.configs.get(self.DEFAULT_SECTION),
+        return int(self.configs.get(self.DEFAULT_SECTION,
             self.DEFAULTS["big_clock_size"][0],
-            fallback = self.DEFAULTS["big_clock_size"][1])
+            fallback = self.DEFAULTS["big_clock_size"][1]))
 #=========================================================
     def resetPreStartSecs(self):
         if (not self.configs.get(self.DEFAULT_SECTION,

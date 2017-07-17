@@ -12,7 +12,7 @@ class Ui_settingsDialog(object):
     def setupUi(self, settingsDialog):
         settingsDialog.setObjectName("settingsDialog")
         settingsDialog.setWindowModality(QtCore.Qt.WindowModal)
-        settingsDialog.resize(361, 177)
+        settingsDialog.resize(360, 180)
         self.groupBox = QtWidgets.QGroupBox(settingsDialog)
         self.groupBox.setGeometry(QtCore.QRect(10, 10, 211, 51))
         self.groupBox.setObjectName("groupBox")
