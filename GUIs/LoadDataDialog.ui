@@ -88,6 +88,9 @@
      <height>280</height>
     </rect>
    </property>
+   <property name="lineWrapMode">
+    <enum>QPlainTextEdit::NoWrap</enum>
+   </property>
    <property name="placeholderText">
     <string>Dalyvio nr. ir laikai</string>
    </property>
@@ -116,6 +119,12 @@
       <height>280</height>
      </rect>
     </property>
+    <property name="tabChangesFocus">
+     <bool>true</bool>
+    </property>
+    <property name="lineWrapMode">
+     <enum>QPlainTextEdit::NoWrap</enum>
+    </property>
     <property name="placeholderText">
      <string>Dalyvio nr.</string>
     </property>
@@ -128,6 +137,12 @@
       <width>101</width>
       <height>280</height>
      </rect>
+    </property>
+    <property name="tabChangesFocus">
+     <bool>true</bool>
+    </property>
+    <property name="lineWrapMode">
+     <enum>QPlainTextEdit::NoWrap</enum>
     </property>
     <property name="placeholderText">
      <string>Laikai</string>
