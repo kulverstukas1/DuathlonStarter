@@ -1,7 +1,7 @@
 import os
 import math
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QFileDialog, QMessageBox
 from configparser import ConfigParser
 from SettingsDialog import Ui_settingsDialog
 
@@ -87,10 +87,13 @@ class ConfigHolder:
                 ui.soundFilePath.setText(os.path.relpath((fileDialog.selectedFiles()[0])))
         #---------------
         def okBtnClick(settingsDlg, ui):
-            self.configs.set(self.DEFAULT_SECTION, "sound_file", ui.soundFilePath.text())
-            self.configs.set(self.DEFAULT_SECTION, "secs_before_first", str(ui.preStartSecs.value()))
-            self.configs.set(self.DEFAULT_SECTION, "big_clock_size", str(ui.bigClockSize.value()))
-            self.configs.write(open(self.CONFIG_FILE, "w"))
+            try:
+                self.configs.set(self.DEFAULT_SECTION, "sound_file", ui.soundFilePath.text())
+                self.configs.set(self.DEFAULT_SECTION, "secs_before_first", str(ui.preStartSecs.value()))
+                self.configs.set(self.DEFAULT_SECTION, "big_clock_size", str(ui.bigClockSize.value()))
+                self.configs.write(open(self.CONFIG_FILE, "w"))
+            except PermissionError as e:
+                QMessageBox.critical(self.settingsDialog, "Klaida", "Negalima įrašyti pakeitimų į failą", QMessageBox.Ok)
             settingsDlg.close()
         #---/Callbacks---
 #=========================================================
