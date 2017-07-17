@@ -244,7 +244,7 @@ class Start(QMainWindow, Ui_MainWindow):
         if (verified):
             if (dialog is not None): dialog.close()
         else:
-            QMessageBox.critical(self, "Klaida", "Bloga duomenų struktūra", QMessageBox.Ok)
+            QMessageBox.critical(self, "Klaida", "Bloga duomenų struktūra.\nTinkama struktūra: Vardas[tab]00:00,0", QMessageBox.Ok)
         return verified
 #=========================================================
     ''' Enables needed menu bar items '''
