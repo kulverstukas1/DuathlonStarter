@@ -1,3 +1,8 @@
-Renardas Gruodis	00:04,3
-Dalia Grybauskaite	00:10,4
-Tomas Vainauskas	00:15,9
+FF	01:06,4
+EE	00:46,6
+AA	00:04,5
+DD	00:36,1
+BB	00:06,4
+CC	00:18,4
+HH	01:34,9
+GG	01:29,9

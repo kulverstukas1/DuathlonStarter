@@ -48,7 +48,14 @@ class DataParser:
     ''' Method for loading data into an array for better management '''
     def loadData(self, data):
         self.LOADED_DATA = [] # Clear previous entries
-        lines = sorted(data.split("\n"), key=self.sortingKey)
+        # we need to make the whole thing unified
+        dataLines = []
+        for line in data.split("\n"):
+            runner, mins, secs, millis = re.split("[\t:,]", line)
+            mins = mins.zfill(2)
+            secs = secs.zfill(2)
+            dataLines.append("%s	%s:%s,%s" % (runner, mins, secs, millis))
+        lines = sorted(dataLines, key=self.sortingKey)
         prevTimeInMillis = 0
         timeInMillis = 0
         for line in lines:
@@ -113,8 +120,9 @@ class DataParser:
 #=========================================================
     '''
         Function that is used in sorted() to sort out given times.
-        This works by padding minutes with 0 for a unified format.
+        This returns the time string as a whole integer without
+        symbols and zeroes.
     '''
     def sortingKey(self, s):
-        return ":".join(s.split("\t")[1].split(":")[0].zfill(2))
+        return int(re.sub("[:,]", "", s.split("\t")[1]).strip("0"))
 #=========================================================
