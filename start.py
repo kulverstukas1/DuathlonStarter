@@ -280,7 +280,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.nextRunnerNr.setElidedText("Dalyvis: %s" % currentRunner["runnerNr"])
         self.nextRunnerTime.setText("Laikas: %s" % currentRunner["time"])
         self.bigClock.updateTimeLabel("00:00,0")
-        # self.bigClock.updateRunnerLabels(currentRunner["runnerNr"])
+        self.bigClock.updateRunnerLabels(currentRunner["runnerNr"])
 #=========================================================
     ''' Get absolute path to resource, works for dev and for PyInstaller '''
     def resource_path(self, relative_path):

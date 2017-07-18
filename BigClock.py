@@ -29,6 +29,7 @@ class BigClock(QDialog, Ui_bigClockDialog):
         self.bigClockDialog.setGeometry(px-dw-5, py-((dh-ph)/2), dw, dh)
         # self.bigClockDialog.setMinimumSize(dw, dh)
         self.updateLabelFontSizes(sizeIncrease)
+        self.updateRunnerLabels(None)
         self.bigClockDialog.show()
         
     ''' For setting up a dialog interface for the first time '''
@@ -48,9 +49,10 @@ class BigClock(QDialog, Ui_bigClockDialog):
         
     ''' Updates this dialog with runner status. Moves next to current '''
     def updateRunnerLabels(self, runner):
-        if (self.ui is not None):
+        if (runner is not None):
             self.runnerInfo["current"] = self.runnerInfo["next"]
             self.runnerInfo["next"] = runner
+        if (self.ui is not None):
             self.ui.currRunnerLabel.setText(self.runnerInfo["current"])
             self.ui.nextRunnerLabel.setText(self.runnerInfo["next"])
         
