@@ -18,11 +18,6 @@ class RunnerList(QDialog, Ui_runnerListDialog):
         
     ''' Called when we need to show this dialog '''
     def showRunnerListDialog(self, data, currRunner):
-        self.reset(data, currRunner)
-        self.runnerListDialog.show()
-        
-    ''' Resets the interface in case new data was loaded '''
-    def reset(self, data, currRunner):
         # don't create multiple references, only allow one dialog at a time
         if (self.runnerListDialog is None):
             self.runnerListDialog = QDialog(self.parent,
@@ -44,7 +39,15 @@ class RunnerList(QDialog, Ui_runnerListDialog):
         # this is how we center the list dialog relative to the main window
         self.runnerListDialog.setGeometry(px+pw+5, py-((dh-ph)/2), dw, dh)
         self.prepRunnerList(self.runnerList, data, currRunner)
-    
+        self.runnerListDialog.show()
+
+    '''
+        Resets the interface in case new data was loaded.
+        Used for outer references, because the name makes more sense.
+    '''
+    def reset(self, data, currRunner):
+        self.prepRunnerList(self.runnerList, data, currRunner)
+        
     ''' Prepares as list of runners with loaded data '''
     def prepRunnerList(self, listObj, data, currRunner):
         headers = ['Laikas', 'Bėgikas', 'Paleistas']
