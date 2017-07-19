@@ -86,9 +86,10 @@ class Start(QMainWindow, Ui_MainWindow):
             self.timerLabel.setText(millisText)
             self.bigClock.updateTimeLabel(millisText)
         else:
+            currentRunner = self.dataParser.getCurrentRunner()
             if (self.dataParser.getCurrentRunnerNum() > 0):
                 winsound.PlaySound(self.configs.getSoundFileName(), winsound.SND_ASYNC)
-            currentRunner = self.dataParser.getCurrentRunner()
+                self.bigClock.updateRunnerLabels(currentRunner["runnerNr"])
             self.runnerList.markGreen(self.dataParser.getCurrentRunnerNum())
             if (currentRunner):
                 if (self.dataParser.getCurrentRunnerNum() == 0):
@@ -100,7 +101,7 @@ class Start(QMainWindow, Ui_MainWindow):
                 self.currentRunnerTime.setText("Laikas: %s" % currentRunner["time"])
                 
                 nextRunner = self.dataParser.getNextRunner()
-                if (not nextRunner): nextRunner = {"runnerNr":"---", "time":"---","timeInMillis":0}
+                if (not nextRunner): nextRunner = {"runnerNr":"---", "time":"---", "timeInMillis":0}
                 self.nextRunnerNr.setElidedText("Dalyvis: %s" % nextRunner["runnerNr"])
                 self.nextRunnerTime.setText("Laikas: %s" % nextRunner["time"])
                 self.currentDifference.setText(
@@ -108,7 +109,7 @@ class Start(QMainWindow, Ui_MainWindow):
                         nextRunner['timeInMillis']-currentRunner["timeInMillis"]
                     ) if (nextRunner['timeInMillis'] > currentRunner["timeInMillis"]) else "---"
                 )
-                self.bigClock.updateRunnerLabels(currentRunner["runnerNr"])
+                
             else:
                 self.runnerTimer.stop()
                 self.startBtn.setEnabled(True)
@@ -280,6 +281,7 @@ class Start(QMainWindow, Ui_MainWindow):
         self.nextRunnerNr.setElidedText("Dalyvis: %s" % currentRunner["runnerNr"])
         self.nextRunnerTime.setText("Laikas: %s" % currentRunner["time"])
         self.bigClock.updateTimeLabel("00:00,0")
+        self.bigClock.resetRunnerLabels()
         self.bigClock.updateRunnerLabels(currentRunner["runnerNr"])
 #=========================================================
     ''' Get absolute path to resource, works for dev and for PyInstaller '''

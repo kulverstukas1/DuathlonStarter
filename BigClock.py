@@ -56,6 +56,14 @@ class BigClock(QDialog, Ui_bigClockDialog):
             self.ui.currRunnerLabel.setText(self.runnerInfo["current"])
             self.ui.nextRunnerLabel.setText(self.runnerInfo["next"])
         
+    ''' Resets runner labels to empty strings '''
+    def resetRunnerLabels(self):
+        if (self.ui is not None):
+            self.ui.currRunnerLabel.setText("")
+            self.ui.nextRunnerLabel.setText("")
+            self.runnerInfo["current"] = "---"
+            self.runnerInfo["next"] = "---"
+        
     ''' Updates dialog labels to be of given size percentage '''
     def updateLabelFontSizes(self, sizeIncrease):
         ''' Calculates size increase by percentage '''
