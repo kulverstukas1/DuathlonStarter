@@ -70,19 +70,21 @@ class RunnerList(QDialog, Ui_runnerListDialog):
     
     ''' Resets the last column color to red for all runners '''
     def resetColor(self):
-        listModel = self.runnerList.model()
-        rowCount = listModel.rowCount()
-        for i in range(rowCount):
-            item = listModel.item(i, 2)
-            item.setBackground(self.redBrush)
-            listModel.setItem(i, 2, item)
+        if (self.runnerListDialog is not None):
+            listModel = self.runnerList.model()
+            rowCount = listModel.rowCount()
+            for i in range(rowCount):
+                item = listModel.item(i, 2)
+                item.setBackground(self.redBrush)
+                listModel.setItem(i, 2, item)
     
     ''' Marks the runner green when he is to go '''
     def markGreen(self, runner):
-        # this is to compensate for the first runner
-        if (runner > 0):
-            runner -= 1
-            listModel = self.runnerList.model()
-            item = listModel.item(runner, 2)
-            item.setBackground(self.greenBrush)
-            listModel.setItem(runner, 2, item)
+        if (self.runnerListDialog is not None):
+            # this is to compensate for the first runner
+            if (runner > 0):
+                runner -= 1
+                listModel = self.runnerList.model()
+                item = listModel.item(runner, 2)
+                item.setBackground(self.greenBrush)
+                listModel.setItem(runner, 2, item)

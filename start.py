@@ -89,7 +89,8 @@ class Start(QMainWindow, Ui_MainWindow):
             currentRunner = self.dataParser.getCurrentRunner()
             if (self.dataParser.getCurrentRunnerNum() > 0):
                 winsound.PlaySound(self.configs.getSoundFileName(), winsound.SND_ASYNC)
-                self.bigClock.updateRunnerLabels(currentRunner["runnerNr"])
+                if (currentRunner):
+                    self.bigClock.updateRunnerLabels(currentRunner["runnerNr"])
             self.runnerList.markGreen(self.dataParser.getCurrentRunnerNum())
             if (currentRunner):
                 if (self.dataParser.getCurrentRunnerNum() == 0):
