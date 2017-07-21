@@ -46,7 +46,8 @@ class RunnerList(QDialog, Ui_runnerListDialog):
         Used for outer references, because the name makes more sense.
     '''
     def reset(self, data, currRunner):
-        self.prepRunnerList(self.runnerList, data, currRunner)
+        if (self.runnerListDialog is not None):
+            self.prepRunnerList(self.runnerList, data, currRunner)
         
     ''' Prepares as list of runners with loaded data '''
     def prepRunnerList(self, listObj, data, currRunner):
