@@ -153,6 +153,7 @@ class Start(QMainWindow, Ui_MainWindow):
                 data = self.dataParser.joinRunnerData(
                     [ui.runnerNrDataText.toPlainText().strip(),
                     ui.runnerTimeDataText.toPlainText().strip()])
+                print(data)
             if (self.checkData(data, dialog)):
                 self.dataParser.loadData(data)
                 self.populateGui()

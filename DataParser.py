@@ -124,5 +124,6 @@ class DataParser:
         symbols and zeroes.
     '''
     def sortingKey(self, s):
-        return int(re.sub("[:,]", "", s.split("\t")[1]).strip("0"))
+        rtn = re.sub("[:,]", "", s.split("\t")[1]).strip("0")
+        return int(rtn) if rtn != "" else 0
 #=========================================================
