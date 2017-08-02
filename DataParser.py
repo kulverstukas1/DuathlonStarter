@@ -51,11 +51,12 @@ class DataParser:
         # we need to make the whole thing unified
         dataLines = []
         for line in data.split("\n"):
-            runner, mins, secs, millis = re.split("[\t:,]", line)
+            runner, mins, secs, millis = re.split("[\t:,]", line.strip())
             mins = mins.zfill(2)
             secs = secs.zfill(2)
             dataLines.append("%s	%s:%s,%s" % (runner, mins, secs, millis))
         lines = sorted(dataLines, key=self.sortingKey)
+        # print(lines)
         prevTimeInMillis = 0
         timeInMillis = 0
         for line in lines:
@@ -124,6 +125,6 @@ class DataParser:
         symbols and zeroes.
     '''
     def sortingKey(self, s):
-        rtn = re.sub("[:,]", "", s.split("\t")[1]).strip("0")
+        rtn = re.sub("[:,]", "", s.split("\t")[1]).lstrip("0")
         return int(rtn) if rtn != "" else 0
 #=========================================================
